@@ -1,0 +1,70 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "Main"
+
+
+sourceSets{
+    main {
+        java {
+            srcDirs = ['src']
+        }
+
+    }
+}
+
+repositories{
+    mavenCentral()
+    maven {
+        url "https://www.seasar.org/maven/maven2/"
+    }
+    // flatDir{
+    //     dirs 'mypath/libs'
+    // }
+}
+
+
+dependencies{
+    compile group: 'org.antlr', name: 'antlr4', version: '4.5'
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
+    //compile group: 'org.json', name: 'json', version: '20160810'
+    // https://mvnrepository.com/artifact/com.metaparadigm/json-rpc
+    compile group: 'com.metaparadigm', name: 'json-rpc', version: '1.0'
+
+    // https://mvnrepository.com/artifact/org.eclipse.jdt/org.eclipse.jdt.core
+    compile group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.core', version: '3.10.0'
+
+    // // https://mvnrepository.com/artifact/org.eclipse/jdt-core
+    // compile group: 'org.eclipse', name: 'jdt-core', version: '3.5.2'
+
+    // https://mvnrepository.com/artifact/org.eclipse.core/org.eclipse.core.runtime
+    compile group: 'org.eclipse.core', name: 'org.eclipse.core.runtime', version: '3.7.0'
+
+    // https://mvnrepository.com/artifact/org.eclipse.core/org.eclipse.core.resources
+    compile group: 'org.eclipse.core', name: 'org.eclipse.core.resources', version: '3.7.100'
+
+    // https://mvnrepository.com/artifact/org.eclipse.core/org.eclipse.core.runtime
+    compile group: 'org.eclipse.core', name: 'org.eclipse.core.runtime', version: '3.7.0'
+
+    // https://mvnrepository.com/artifact/com.google.collections/google-collections
+    compile group: 'com.google.collections', name: 'google-collections', version: '1.0'
+    // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1'
+    // https://mvnrepository.com/artifact/org.neo4j/neo4j-kernel
+    compile group: 'org.neo4j', name: 'neo4j-kernel', version: '2.3.12'
+
+    // // https://mvnrepository.com/artifact/com.sun.jersey/jersey-client
+    // compile group: 'com.sun.jersey', name: 'jersey-client', version: '1.4'
+
+    // // https://mvnrepository.com/artifact/com.sun.jersey/jersey-core
+    // compile group: 'com.sun.jersey', name: 'jersey-core', version: '1.4'
+
+    // https://mvnrepository.com/artifact/com.sun.jersey/jersey-bundle
+    compile group: 'com.sun.jersey', name: 'jersey-bundle', version: '1.17.1'
+
+
+    // https://mvnrepository.com/artifact/dom4j/dom4j
+    compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
+    // https://mvnrepository.com/artifact/commons-lang/commons-lang
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+}
