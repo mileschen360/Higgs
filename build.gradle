@@ -23,6 +23,11 @@ repositories{
     // }
 }
 
+run {
+    if (project.hasProperty("appArgs")) {
+        args Eval.me(appArgs)
+    }
+}
 
 dependencies{
     compile group: 'org.antlr', name: 'antlr4', version: '4.5'

@@ -198,13 +198,14 @@ public class Main {
 //        String sql = "select id, body from posts where parentid IS NOT NULL AND id <= " + (idx * COUNT) 
 //        		+ "AND id > " + (idx-1) * COUNT;
 //        String sql = "select id, parentid, body, tags from posts";
-        String sql = "select id, parentid, body, tags from posts where parentid IS NULL AND id >=10000 AND id < 100000";
+		String sql = "select id, parentid, body, tags from posts where parentid IS NULL AND id >= "+args[0]+" AND id < "+args[1];  // each time 200000
+		System.out.println(sql);
         //        String sql = "select id, body from posts where id=5453976";
 //        String sql = "select id, body from posts where id=9175004";
 //        String sql = "select id, body from posts where id=23101";
         conn.setAutoCommit(false);
         stat = conn.createStatement();
-        stat.setFetchSize(500);
+        stat.setFetchSize(200000);
         res = stat.executeQuery(sql);
 //        rsmd = res.getMetaData();
         BufferedWriter writer = new BufferedWriter(new FileWriter(output_dir + "security-posts.txt"));
@@ -215,14 +216,14 @@ public class Main {
         	if (parentId != null) {
         		continue;
         	}else{
-				System.out.println("working on question "+res.getObject(COL_ID));
+				//System.out.println("working on question "+res.getObject(COL_ID));
 			}
         	String tags = (String)res.getObject(COL_TAGS);
         	if (tags == null){
-				System.out.println("skipped this no tag question");
+				//System.out.println("skipped this no tag question");
 				continue;
 			}
-			System.out.println("tags:"+tags);
+			//System.out.println("tags:"+tags);
         	String[] sTags = tags.split(">");
         	int tagCounter = 0;
         	for (String t : sTags) {
@@ -232,7 +233,7 @@ public class Main {
         		}
         	}
         	if (tagCounter < 2){
-				System.out.println("skipped this <2 tags question");
+				//System.out.println("skipped this <2 tags question");
 				continue;
 			}
 		 
@@ -240,6 +241,7 @@ public class Main {
 			String sql2 = "select id, body from posts where parentid = " + res.getObject(COL_ID);
 			System.out.println(sql2);
         	stat = conn.createStatement();
+			stat.setFetchSize(500);
         	ResultSet res2 = stat.executeQuery(sql2);
         	
         	while(res2.next()) {
@@ -277,7 +279,8 @@ public class Main {
                 					// do nothing, because it is security irrelevant
                 				} else {
                 					if (containsSecureMethod(jArr)) {
-                						System.out.println("contains secure method");
+										System.out.println("contains secure method");
+										
                 						saveCode(id, i-1);
                 						if (!idWritten) {
                 							writer.write(id + "\n");
@@ -296,7 +299,8 @@ public class Main {
             	}
         	}
         }
-        writer.close();
+		writer.close();
+		conn.close();
 	}
 
 	private static int countTokens(ANTLRInputStream stream) {
@@ -383,7 +387,12 @@ public class Main {
 		return flag;
 	}
 
-    private static void saveCode(Integer id, int idx) throws IOException {
+
+    private static void saveCode(Integer postid, int indx) throws Exception {
+		saveCodeToDB(postid, indx);
+	}
+
+    private static void saveCodeToFile(Integer id, int idx) throws IOException {
     	String code = restAPIAccess.JavaBaker.getParsedString();
     	code = code.replace("&gt;", ">")
     			   .replace("&lt;", "<")
@@ -394,5 +403,20 @@ public class Main {
     	BufferedWriter writer = new BufferedWriter(new FileWriter(path));
 		writer.write(code);
 		writer.close();
-    }
+	}
+	
+
+	private static void saveCodeToDB(Integer postid, int indx) throws Exception{
+        stat = conn.createStatement();		
+    	String code = restAPIAccess.JavaBaker.getParsedString();
+    	code = code.replace("&gt;", ">")
+    			   .replace("&lt;", "<")
+    			   .replace("&amp;", "&");
+
+		String sql = "INSERT INTO snippets(code, indx, postid) VALUES($aesc6$"+code+"$aesc6$,"+indx+","+postid+")";
+		stat.executeUpdate(sql);
+		System.out.println("committing to database");
+		conn.commit();
+	}
+
 } 
