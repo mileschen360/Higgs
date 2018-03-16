@@ -220,93 +220,101 @@ public class Main {
         
         int counter = 0;
         while(res.next()) {
-        	Object parentId = res.getObject(COL_PARENT_ID);
-        	if (parentId != null) {
-        		continue;
-        	}else{
-				//System.out.println("working on question "+res.getObject(COL_ID));
-			}
+        	// Object parentId = res.getObject(COL_PARENT_ID);
+        	// if (parentId != null) {  // this can be achived by SQL
+        	// 	continue;
+        	// }else{
+			// 	//System.out.println("working on question "+res.getObject(COL_ID));
+			// }
         	String tags = (String)res.getObject(COL_TAGS);
+			Integer parentid = (Integer)res.getObject(COL_ID);
         	if (tags == null){
 				//System.out.println("skipped this no tag question");
-				continue;
-			}
-			//System.out.println("tags:"+tags);
-        	String[] sTags = tags.split(">");
-        	int tagCounter = 0;
-        	for (String t : sTags) {
-        		t = t.substring(1);
-        		if (keywords.contains(t)) {
-        			tagCounter ++;
-        		}
-        	}
-        	if (tagCounter < 2){
-				//System.out.println("skipped this <2 tags question");
-				continue;
-			}
-		 
-			// query all answers to this question
-			String sql2 = "select id, body from posts where parentid = " + res.getObject(COL_ID);
-			System.out.println(sql2);
-        	stat = conn.createStatement();
-			stat.setFetchSize(500);
-        	ResultSet res2 = stat.executeQuery(sql2);
-        	
-        	while(res2.next()) {
-        		String body = (String)res2.getObject(2);
-            	if (body.contains("<code>")) {
-            		Integer id = (Integer)res2.getObject(COL_ID);
-            		System.out.println(++counter + ": " + id);
-            		String[] segs = body.split("<code>");
-            		JSONObject jObj = null;
-            		boolean idWritten = false;
-            		for (int i = 1; i < segs.length; i++) {
-            			String tmp = segs[i];
-            			int endIndex = tmp.indexOf("</code>");
-            			if (endIndex == -1) {
-            				continue;
-            			}
-            			tmp = tmp.substring(0, endIndex);
-            			ANTLRInputStream stream = new ANTLRInputStream(tmp);
-            			int tokenCount = countTokens(stream);
-            			if (tokenCount >= MIN_TOKEN_SIZE) {
-            				try {
-								System.out.println("JavaBaker.getSecurityAPIs ...");
-            					jObj = restAPIAccess.JavaBaker.getSecurityAPIs(tmp);
-								System.out.println("Done");
-            				} catch (Exception e) {// For non-Java code, this exception can be thrown
-//            					System.out.println("This is not java code, so no need to process it");
-								System.out.println(e);
-            					continue;
-            				}     
-            				Object val = jObj.get("api_elements");
-//            				System.out.println(val);
-            				if (val instanceof JSONArray) {
-            					JSONArray jArr = (JSONArray) jObj.get("api_elements");
-                				if (jArr.length() == 0) {   
-                					// do nothing, because it is security irrelevant
-                				} else {
-                					if (containsSecureMethod(jArr)) {
-										System.out.println("contains secure method");
-										
-                						saveCode(id, i-1);
-                						if (!idWritten) {
-                							writer.write(id + "\n");
-                							idWritten = true;
-                						}
-                					}	
-                				}
-            				} 
-//            				else { //comment by nmeng: If there is only one API_TYPE inferred, it is not interesting. The reason is the class name may be accidentally identical to a secure API
-//            					if (isKnownAPI ((JSONObject)val)) {
-//            						saveCode(id, i-1);
-//            					}
-//            				}        				
-            			}
-            		}
-            	}
-        	}
-        }
+			}else{
+				//System.out.println("tags:"+tags);
+				String[] sTags = tags.split(">");
+				int tagCounter = 0;
+				for (String t : sTags) {
+					t = t.substring(1);
+					if (keywords.contains(t)) {
+						tagCounter ++;
+					}
+				}
+	        	if (tagCounter < 2){
+					//System.out.println("skipped this <2 tags question");
+				}else{
+					// query all answers to this question
+					String sql2 = "select id, body from posts where parentid = " + parentid;
+					System.out.println(sql2);
+					stat = conn.createStatement();
+					stat.setFetchSize(500); // at most 
+					ResultSet res2 = stat.executeQuery(sql2);
+					
+					while(res2.next()) {
+						String body = (String)res2.getObject(2);
+						Integer id = (Integer)res2.getObject(COL_ID);
+						if (body.contains("<code>")) {
+							//Integer id = (Integer)res2.getObject(COL_ID); //has been moved out of if
+							System.out.println(++counter + ": " + id);
+							String[] segs = body.split("<code>");
+							JSONObject jObj = null;
+							boolean idWritten = false;
+							for (int i = 1; i < segs.length; i++) {
+								String tmp = segs[i];
+								int endIndex = tmp.indexOf("</code>");
+								if (endIndex == -1) {
+									continue;
+								}
+								tmp = tmp.substring(0, endIndex);
+								ANTLRInputStream stream = new ANTLRInputStream(tmp);
+								int tokenCount = countTokens(stream);
+								if (tokenCount >= MIN_TOKEN_SIZE) {
+									try {
+										System.out.println("JavaBaker.getSecurityAPIs ...");
+										jObj = restAPIAccess.JavaBaker.getSecurityAPIs(tmp);
+										System.out.println("Done");
+									} catch (Exception e) {// For non-Java code, this exception can be thrown
+		//            					System.out.println("This is not java code, so no need to process it");
+										System.out.println(e);
+										continue;
+									}     
+									Object val = jObj.get("api_elements");
+		//            				System.out.println(val);
+									if (val instanceof JSONArray) {
+										JSONArray jArr = (JSONArray) jObj.get("api_elements");
+										if (jArr.length() == 0) {   
+											// do nothing, because it is security irrelevant
+										} else {
+											if (containsSecureMethod(jArr)) {
+												System.out.println("contains secure method");
+												
+												saveCode(id, i-1);
+												if (!idWritten) {
+													writer.write(id + "\n");
+													idWritten = true;
+												}
+											}	
+										}
+									} 
+		//            				else { //comment by nmeng: If there is only one API_TYPE inferred, it is not interesting. The reason is the class name may be accidentally identical to a secure API
+		//            					if (isKnownAPI ((JSONObject)val)) {
+		//            						saveCode(id, i-1);
+		//            					}
+		//            				}        				
+								}
+							}
+						} // end if has code tag
+						String sql_mark_processed_answer = "UPDATE marks SET processed=TRUE WHERE postid="+id;
+						stat = conn.createStatement();
+						stat.executeUpdate(sql_mark_processed_answer);
+					} // next answer post
+				} // end if ntags < 2
+			} // end if no tags
+			String sql_mark_processed_question = "UPDATE marks SET processed=TRUE WHERE postid="+parentid;
+			stat = conn.createStatement();
+			stat.executeUpdate(sql_mark_processed_question);	
+			conn.commit();
+        } // next question post
 		writer.close();
 		conn.close();
 	}
