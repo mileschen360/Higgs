@@ -27,7 +27,7 @@ import org.json.JSONObject;
 public class Main {
 
 	public static String config_file = "/home/mschen/code/higgs/SOCodeExtractor/src/extractor.conf";
-	public static String namelist_file = "/home/mschen/code/higgs/SOCodeExtractor/src/namelist.txt";
+	public static String namelist_file = "/home/mschen/code/higgs/SOCodeExtractor/namelist.txt";
 	public static List<String> stopwords = null;
 	public static List<String> keywords = null;
 	
@@ -199,7 +199,14 @@ public class Main {
 //        String sql = "select id, body from posts where parentid IS NOT NULL AND id <= " + (idx * COUNT) 
 //        		+ "AND id > " + (idx-1) * COUNT;
 //        String sql = "select id, parentid, body, tags from posts";
-		String sql = "select id, parentid, body, tags from posts where parentid IS NULL AND id >= "+args[0]+" AND id < "+args[1];  // each time 200000
+
+
+
+		String sql = "SELECT posts.id, posts.parentid, posts.body, posts.tags "
+				   + "FROM posts INNER JOIN marks on posts.id=marks.postid "
+				   + "WHERE posts.id >= "+args[0]+" AND posts.id < "+args[1]+" "  // each time 200000
+				   + "AND posts.parentid IS NULL "
+				   + "AND (marks.processed IS NULL OR marks.processed=FALSE)";
 		System.out.println(sql);
         //        String sql = "select id, body from posts where id=5453976";
 //        String sql = "select id, body from posts where id=9175004";
