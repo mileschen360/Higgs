@@ -204,7 +204,7 @@ public class Main {
 
 		String sql = "SELECT posts.id, posts.parentid, posts.body, posts.tags "
 				   + "FROM posts INNER JOIN marks on posts.id=marks.postid "
-				   + "WHERE posts.id >= "+args[0]+" AND posts.id < "+args[1]+" "  // each time 200000
+				   + "WHERE posts.id >= "+args[0]+" AND posts.id < "+args[1]+" "  // each time 5000000
 				   + "AND posts.parentid IS NULL "
 				   + "AND (marks.processed IS NULL OR marks.processed=FALSE)";
 		System.out.println(sql);
@@ -213,7 +213,7 @@ public class Main {
 //        String sql = "select id, body from posts where id=23101";
         conn.setAutoCommit(false);
         stat = conn.createStatement();
-        stat.setFetchSize(200000);
+        stat.setFetchSize(5000000);
         res = stat.executeQuery(sql);
 //        rsmd = res.getMetaData();
         BufferedWriter writer = new BufferedWriter(new FileWriter(output_dir + "security-posts.txt"));
@@ -316,6 +316,7 @@ public class Main {
 			conn.commit();
         } // next question post
 		writer.close();
+		stat.close();
 		conn.close();
 	}
 
