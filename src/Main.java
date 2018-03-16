@@ -27,7 +27,7 @@ import org.json.JSONObject;
 public class Main {
 
 	public static String config_file = "/home/mschen/code/higgs/SOCodeExtractor/src/extractor.conf";
-	public static String namelist_file = "/home/mschen/code/higgs/SOCodeExtractor/namelist.txt";
+	public static String namelist_file = "/home/mschen/code/higgs/SOCodeExtractor/src/namelist.txt";
 	public static List<String> stopwords = null;
 	public static List<String> keywords = null;
 	
@@ -55,6 +55,7 @@ public class Main {
 		try{
 			Properties prop = new Properties();
 			InputStream is = new FileInputStream(config_file);
+			//InputStream is = Main.class.getResourceAsStream("/extractor.config");
 			
 			prop.load(is);
 			
@@ -413,7 +414,7 @@ public class Main {
     			   .replace("&lt;", "<")
     			   .replace("&amp;", "&");
 
-		String sql = "INSERT INTO snippets(code, indx, postid) VALUES($aesc6$"+code+"$aesc6$,"+indx+","+postid+")";
+		String sql = "INSERT INTO snippets(code, indx, postid) VALUES($aesc6$"+code+"$aesc6$,"+indx+","+postid+") ON CONFLICT DO NOTHING";  // upsert supported by postgres 9.5+
 		stat.executeUpdate(sql);
 		System.out.println("committing to database");
 		conn.commit();
