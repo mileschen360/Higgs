@@ -3,7 +3,8 @@
     Need JDK 1.8
 
     To run:
-    ```sh
+
+    ```bash
     ./gradlew run -PappArgs="['39800000', '40000000']"  # parse postid >= 39800000 AND postid < 40000000
     ```
 
