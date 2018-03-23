@@ -1,8 +1,6 @@
 # Installations
 
-Need JDK 1.8
-
-To run:
+Make sure you have JDK 1.8, and the PostgreSQL server and Neo4j server is running. Then just run the following command to start extraction.
 
 ```bash
 ./gradlew run -PappArgs="['39800000', '40000000']"  # parse postid >= 39800000 AND postid < 40000000
