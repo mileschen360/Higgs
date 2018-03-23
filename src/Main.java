@@ -230,7 +230,7 @@ public class Main {
 			Integer parentid = (Integer)res.getObject(COL_ID);
         	if (tags == null){
 				//System.out.println("skipped this no tag question");
-			}else{
+			}else{ // enter the next level fillter
 				//System.out.println("tags:"+tags);
 				String[] sTags = tags.split(">");
 				int tagCounter = 0;

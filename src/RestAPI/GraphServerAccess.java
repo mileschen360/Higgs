@@ -33,8 +33,8 @@ public class GraphServerAccess {
 		//cEliminator = new ClusterEliminator("class-collisions_update.txt", "forReid.txt");
 		// cEliminator = new ClusterEliminator("/home/nm8247/Software/workspaceForLuna/java-snippet-parser/class-collisions_update.txt",
 		// 		"/home/nm8247/Software/workspaceForLuna/java-snippet-parser/forReid.txt");
-		cEliminator = new ClusterEliminator("/home/mschen/java-snippet-parser/class-collisions_update.txt",
-				"/home/mschen/java-snippet-parser/forReid.txt");
+		cEliminator = new ClusterEliminator("/home/mschen/code/higgs/SOCodeExtractor/java-snippet-parser/class-collisions_update.txt",
+				"/home/mschen/code/higgs/SOCodeExtractor/java-snippet-parser/forReid.txt");
 		
 		logger.disableAccessTimes();
 		logger.disableCacheHit();
