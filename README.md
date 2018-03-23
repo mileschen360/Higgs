@@ -15,7 +15,7 @@ The public available stack overflow is available at [https://archive.org/details
 
 We convert all xml files (?) into Postgresql database. The database has tables: posts, comments, users, etc.
 
-There are roughly about 40 million posts in a PostgreSQL database, including all topics, such as not Java language and not security related posts.
+There are roughly about 47 million posts in a PostgreSQL database, including all topics, such as not Java language and not security related posts.
 
 We would first need to filter out the posts that are java security related.
 
@@ -40,7 +40,7 @@ We first use tags as a the first filter, we requires posts to satisfy the follow
 
 
 
-## process all 40 millions parallely on a cluster
+## process all 47 millions parallely on a cluster
 
 we use port forward to tunnelling to the database server:
 
