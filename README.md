@@ -42,7 +42,12 @@ We first use tags as a the first filter, we requires posts to satisfy the follow
 
 ## process all 40 millions parallely on a cluster
 
-we set host 
+we use port forward to tunnelling to the database server:
+
+```bash
+ssh -f mschen@newriver1.arc.vt.edu -NL 10002:localhost:10002
+ssh -f mschen@newriver1.arc.vt.edu -NL 7474:localhost:7474
+``` 
 
 
 ## store the code snippets back to database
