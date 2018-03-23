@@ -1,12 +1,12 @@
 # Installations
 
-    Need JDK 1.8
+Need JDK 1.8
 
-    To run:
+To run:
 
-    ```bash
-    ./gradlew run -PappArgs="['39800000', '40000000']"  # parse postid >= 39800000 AND postid < 40000000
-    ```
+```bash
+./gradlew run -PappArgs="['39800000', '40000000']"  # parse postid >= 39800000 AND postid < 40000000
+```
 
 # Data
 
