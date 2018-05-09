@@ -27,7 +27,7 @@ import org.json.JSONObject;
 public class Main {
 
 	public static String config_file = "/home/mschen/code/higgs/SOCodeExtractor/src/extractor.conf";
-	public static String namelist_file = "/home/mschen/code/higgs/SOCodeExtractor/namelist.txt";
+	public static String namelist_file = "/home/mschen/code/higgs/SOCodeExtractor/namelist.txt"; // define the security apis
 	public static List<String> stopwords = null;
 	public static List<String> keywords = null;
 	
