@@ -1,4 +1,14 @@
-# Installations
+# Stack Overflow project
+
+See [this notebook](clone_detection.ipynb) for some of the results.
+
+
+
+
+-----
+Belows are the technique details.
+
+## Installations
 
 Make sure you have JDK 1.8, and the PostgreSQL server and Neo4j server is running. Then just run the following command to start extraction.
 
