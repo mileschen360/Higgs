@@ -1,6 +1,8 @@
 """Get attributes of labeled clone instances
 """
 
+import pandas as pd
+
 from . import dbinfo
 import psycopg2
 import importlib
@@ -67,6 +69,52 @@ def uattrs(attr, filter_str, col=None):
         else:
             return rows
 
+def attrs_old(attr, filter_str, cols=None):
+    with psycopg2.connect(dbinfo.connect_str) as conn:
+        cursor = conn.cursor()
+        sql = """SELECT %s
+                FROM labels
+                INNER JOIN posts answers
+                ON labels.postid = answers.id
+                INNER JOIN posts questions
+                ON answers.parentid = questions.id
+                INNER JOIN users
+                ON answers.owneruserid = users.id
+                WHERE %s
+                ;""" % (attr, filter_str)
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        if cols is None:
+            return np.array(rows)
+        if isinstance(cols, int):
+            return np.array([row[cols] for row in rows])
+        else:
+            return np.array([[row[col] for col in cols] for row in rows])
+
+def attrs(attr, filter_str, inc_aid=False):
+    with psycopg2.connect(dbinfo.connect_str) as conn:
+        cursor = conn.cursor()
+        sql = """SELECT DISTINCT %s, answers.id
+                FROM labels
+                INNER JOIN posts answers
+                ON labels.postid = answers.id
+                INNER JOIN posts questions
+                ON answers.parentid = questions.id
+                INNER JOIN users
+                ON answers.owneruserid = users.id
+                WHERE %s
+                ;""" % (attr, filter_str)
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        header = [name.strip() for name in attr.split(",")]
+        if inc_aid:
+            header.append('answers.id')
+            data = rows
+        else:
+            data = [row[:-1] for row in rows]
+        return pd.DataFrame(data, columns=header)
+
+
 def ask_learn_answer():
     with psycopg2.connect(dbinfo.connect_str) as conn:
         cursor = conn.cursor()
@@ -102,7 +150,7 @@ def no_owner_answers(attr='DISTINCT posts.id, posts.owneruserid', filter_str='TR
         rows = cursor.fetchall()
         return rows
 
-def is_secure_answer(inc_slabels=[1,2,3,6,7], exc_slabels=[4], postid_name='postid'):
+def is_secure_answer(inc_slabels=[1,2,3,6,7], exc_slabels=[4], postid_name='labels.postid'):
 
     inc_filter = " OR ".join(["labels.slabel=%d"%slabel for slabel in inc_slabels])
     exc_filter = " OR ".join(["labels.slabel=%d"%slabel for slabel in exc_slabels]) if exc_slabels else 'FALSE'
@@ -114,7 +162,7 @@ def is_insecure_answer():
     return ' (labels.slabel=4) '
 
 
-def is_irrelevant_answer(inc_slabels=[0], exc_slabels=range(1,8), postid_name='postid'):
+def is_irrelevant_answer(inc_slabels=[0], exc_slabels=range(1,8), postid_name='labels.postid'):
     inc_filter = " OR ".join(["labels.slabel=%d"%slabel for slabel in inc_slabels])
     exc_filter = " OR ".join(["labels.slabel=%d"%slabel for slabel in exc_slabels]) if exc_slabels else 'FALSE'
 
@@ -122,7 +170,7 @@ def is_irrelevant_answer(inc_slabels=[0], exc_slabels=range(1,8), postid_name='p
                     SELECT postid FROM labels WHERE %s)) """ % (inc_filter, postid_name, exc_filter)
 
 
-def is_mixed_answer(inc_slabels=[5], exc_slabels=[1,2,3,4,6,7], postid_name='postid'):
+def is_mixed_answer(inc_slabels=[5], exc_slabels=[1,2,3,4,6,7], postid_name='labels.postid'):
     inc_filter = " OR ".join(["labels.slabel=%d"%slabel for slabel in inc_slabels])
     exc_filter = " OR ".join(["labels.slabel=%d"%slabel for slabel in exc_slabels]) if exc_slabels else 'FALSE'
 
