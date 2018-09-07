@@ -64,7 +64,6 @@ def create_user_nodes(filter_str="TRUE"):
             tx.run(cypher)
         tx.commit()
 
-
 def create_snippet_nodes(filter_str="TRUE"):
     with dbinfo.driver.session() as session:
         tx = session.begin_transaction()
@@ -87,6 +86,16 @@ def create_instance_nodes(filter_str="TRUE"):
             tx.run(cypher)
         tx.commit()        
 
+def label_instance_nodes(filter_str="TRUE"):
+    with dbinfo.driver.session() as session:
+        tx = session.begin_transaction()
+        rows = get_inst_labels()
+        for row in rows:
+            cypher = """MATCH (:Answer {id:%d})-[:Contains]->(snippet:Snippet {indx:%d})-->(inst:ClnInst {tbegin:%d, tend:%d})
+                        SET inst.slabel = %d, inst.scategory = %d
+                    """ % (row[0], row[1], row[2], row[3], row[4], row[5])
+            tx.run(cypher)
+        tx.commit()
 
 def get_unique_cids(tb_name_suffix, connect_str, filter_str="TRUE"):
     with psycopg2.connect(connect_str) as conn:
@@ -193,6 +202,15 @@ def get_ans_usr(tb_name_suffix=dbinfo.tb_name_suffix, connect_str=dbinfo.connect
                 replaced_rows.append((aid, uid))
         print("there are", n_none_uid, "answers that don't have owner")
         return replaced_rows
+
+def get_inst_labels():
+    with psycopg2.connect(dbinfo.connect_str) as conn:
+        cursor = conn.cursor()
+        sql = """SELECT postid, indx, tbegin, tend, slabel, scategory
+                FROM labels;"""
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        return rows
 
 
 def get_unique_qids(tb_name_suffix, connect_str, filter_str="TRUE"):
