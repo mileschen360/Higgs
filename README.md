@@ -24,7 +24,7 @@ This is the repository for producing the results reported in [How Reliable is th
 
 ## Usage
 
-### Data Overview
+### Dataset
 
 Obtain Stack Overflow data dump from [https://archive.org/details/stackexchange](https://archive.org/details/stackexchange). Then use stackexchange-dump-to-postgres to dump the data from xml files to PostgreSQL database.
 
