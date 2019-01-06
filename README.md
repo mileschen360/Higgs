@@ -1,63 +1,46 @@
 # Stack Overflow project
 
-See [this notebook](clone_detection.ipynb) for some of the results.
+This is the repository for producing the results reported in [How Reliable is the Crowdsourced Knowledge of Security Implementation? (ICSE 2019)](https://2019.icse-conferences.org/track/icse-2019-Technical-Papers#event-overview).
+
+[This notebook](clone_detection.ipynb) servers as a summary of the results.
 
 
+## Dependencies
+
+- PostgreSQL
+- Neo4j
+- stackexchange-dump-to-postgres
+- Java8
+- java-baker
+- CCFinder
+- python3
+- psycopg2
+- numpy
+- scipy
+- pandas
+- neo4j python driver
+- matplotlib
 
 
------
-Belows are the technique details.
+## Usage
 
-## Installations
+### Data Overview
 
-Make sure you have JDK 1.8, and the PostgreSQL server and Neo4j server is running. Then just run the following command to start extraction.
+Obtain Stack Overflow data dump from [https://archive.org/details/stackexchange](https://archive.org/details/stackexchange). Then use stackexchange-dump-to-postgres to dump the data from xml files to PostgreSQL database.
+
+There are roughly about 47 million posts in the 10 year period from 2008 to 2017, including all topics, such as not Java language and not security related posts. The next step is to filter out posts that contain Java security related code snippets.
+
+### Security related code extraction
+
+Make sure you have JDK 1.8, and the PostgreSQL server and Neo4j server is running. Then use the following command with the range of post id to start extraction.
 
 ```bash
 ./gradlew run -PappArgs="['39800000', '40000000']"  # parse postid >= 39800000 AND postid < 40000000
 ```
 
-## Data Overview
+To speed up the extraction process, many extraction processes can be run in parallel for disjoint post id ranges. These processes can be distributed to different compute nodes within a computer cluster as long as they can access the database.
 
-The public available stack overflow is available at [https://archive.org/details/stackexchange](https://archive.org/details/stackexchange)
-
-We convert all xml files (?) into Postgresql database. The database has tables: posts, comments, users, etc.
-
-There are roughly about 47 million posts in a PostgreSQL database, including all topics, such as not Java language and not security related posts.
-
-We would first need to filter out the posts that are java security related.
-
-## Explore the database
-
-We can use the PostgreSQL client tools `psql` to explore the database. Run the following command to connect to the database:
-
-```bash
-psql -h localhost -p 5432 -d stackoverflow -U extractor -W
-```
-
-The password for this database is `extractor`, the same as the user name.
-
-Then you can use commands such as `\dt`, `\d` to get descriptions of the tables, and execute SQL statements (remember to end a statement with ';').
-
-## Java security related filters
-
-We first use tags as a the first filter, we requires posts to satisfy the following criteria to enter the next step in the processing pipe line:
-
-* at least have two tags from the following the predefine tag set
-
-## process all 47 millions parallely on a cluster
-
-we use port forward to tunnel to the database server:
-
-```bash
-ssh -f mschen@newriver1.arc.vt.edu -NL 10002:localhost:10002
-ssh -f mschen@newriver1.arc.vt.edu -NL 7474:localhost:7474
-```
-
-## store the code snippets back to database
-
-work on the first million [0, 1million), extracted 344 (id=[1,344]) snippets
-
-We create the a snippets table to store all the extracted java security related snippets, using the following SQL statement:
+The extracted snippets are saved in the following table
 
 ```SQL
 CREATE TABLE snippets(
@@ -69,19 +52,12 @@ CREATE TABLE snippets(
  );
 ```
 
-### incremental saving results
-
-We use the following SQL to create a table to track the processing process.
+With the extracted code snippets inserted using:
 
 ```SQL
-CREATE TABLE marks(
-    processed BOOLEAN,
-    tagqualified BOOLEAN,
-    securityqualified BOOLEAN,
-    postid INT,
-    PRIMARY KEY (postid),
-    FOREIGN KEY (postid) REFERENCES posts(id)
-);
+INSERT INTO snippets(code, indx, postid)
+VALUES($aesc6$"+code+"$aesc6$,"+indx+","+postid+")
+ON CONFLICT DO NOTHING;
 ```
 
 Use the following SQL to get unprocessed question posts, for example, within the first 2 million posts:
@@ -93,10 +69,12 @@ WHERE posts.id < 2000000 AND posts.parentid IS NULL
 AND (marks.processed IS NULL OR marks.processed=FALSE);
 ```
 
-To save the extracted code snippets, we use:
 
-```SQL
-INSERT INTO snippets(code, indx, postid)
-VALUES($aesc6$"+code+"$aesc6$,"+indx+","+postid+")
-ON CONFLICT DO NOTHING;
+### Clone detection
+
+Use the detector python module for clone detection and save the results to PostgreSQL database.
+
+``` python
+from detector import *
+detect_clones(snippet_dname, ccf_opt, snippet_id_range, connect_str)
 ```
