@@ -1,8 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = "MyJavaBaker"
-
+mainClassName = "Main.java"
 
 sourceSets{
     main {

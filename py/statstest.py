@@ -16,15 +16,18 @@ def mw(a, b, alternative, **kwds):
 
     m = len(a)
     n = len(b)
-    if min(m,n) < 20:
-        #pass
-        print("%% WARNING: scipy Mann-Whitney U test work only for sample size > 20")
     U_b, p = stats.mannwhitneyu(a, b, alternative=alternative, **kwds)
     U_a = m*n - U_b
     a_lt_b =  U_a > U_b
     U = min(U_a, U_b)
     d = 1 - 2.0*U/(m*n)
-    return [p, d, a_lt_b]
+    if min(m,n) < 20:
+        #pass
+        print("%% WARNING: scipy Mann-Whitney U test work only for sample size > 20")
+        if max(m,n) < 20:
+            return [U, m, a_lt_b]
+    else:
+        return [p, d, a_lt_b]
 
 def group_size_mw(**kwds):
     filter_str_secure = labeled.is_secure_clnclss()
