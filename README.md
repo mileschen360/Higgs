@@ -103,8 +103,8 @@ ccfx m a.ccfxd -c -o clonemetrics.tsv -f -o filemetrics.tsv
 
 All the analysis are included in the python module [py](py).
 
-- dbinfo.py
-contains database host name, user name, password. Input according to you setting, then change dbinfo_template.py to dbinfo.py.
+    - dbinfo.py
+      contains database host name, user name, password. Input according to you setting, then change dbinfo_template.py to dbinfo.py.
 
     - ui.py
       provides the labeling user interface with syntax highlight. Labeling results are saved to database in labels table.
