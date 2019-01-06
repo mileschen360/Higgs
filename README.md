@@ -87,13 +87,13 @@ ccfx d java -b 30 -dn ~/code/nbooks/snippets -o ~/code/nbooks/allsnippets_b30.cc
 
 To view the detection result, run:
 ```bash
-ccfx p a.ccfxd
+ccfx p allsnippets.ccfxd
 ```
 
 Use the following commands to export clone metrics and file metrics
 
 ```bash
-ccfx m a.ccfxd -c -o clonemetrics.tsv -f -o filemetrics.tsv
+ccfx m allsnippets.ccfxd -c -o clonemetrics.tsv -f -o filemetrics.tsv
 ```
 
 ### Analysis
