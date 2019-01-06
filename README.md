@@ -1,4 +1,4 @@
-# Stack Overflow project
+# Analysis of Security Code on Stack Overflow
 
 This is the repository for producing the results reported in [How Reliable is the Crowdsourced Knowledge of Security Implementation? (ICSE 2019)](https://2019.icse-conferences.org/track/icse-2019-Technical-Papers#event-overview).
 
