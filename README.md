@@ -101,7 +101,7 @@ ccfx m a.ccfxd -c -o clonemetrics.tsv -f -o filemetrics.tsv
 
 ### Analysis
 
-    All the analysis are included in the python module [py folder](py). 
+    All the analysis are included in the python module (in py folder).
 
     - dbinfo.py
       contains database host name, user name, password. Input according to you setting, then change dbinfo_template.py to dbinfo.py.
