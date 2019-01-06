@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="us_ascii" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us_ascii" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Tutorial of GUI front-end GemX</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body><center><a href="http://www.xrea.com/" target="_blank"><img src="http://imgj.xrea.com/banner_top_1.gif" width="468" height="9" border="0"></a><br><iframe height="60" width="468" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true" src="http://imgj.xrea.com/ad_iframe.html"><a href="http://img.xrea.com/ad_click.fcg" target="_blank"><img src="http://img.xrea.com/ad_img.fcg" border="0"></a></iframe></center>
+<div class="document" id="tutorial-of-gui-front-end-gemx">
+<h1 class="title">Tutorial of GUI front-end GemX</h1>
+
+<blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Toshihiro Kamiya</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">2008/May/7</td>
+</tr>
+<tr class="field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:info&#64;ccfinder.net">info&#64;ccfinder.net</a></td>
+</tr>
+<tr class="field"><th class="field-name">Copyright:</th><td class="field-body">2005-2008 ( C ) Toshihiro Kamiya. All rights reserved.</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#detecting-code-clone" id="id1">1. Detecting Code Clone</a></li>
+<li><a class="reference internal" href="#investigating-code-clones" id="id2">2. Investigating Code Clones</a><ul>
+<li><a class="reference internal" href="#scatter-plot" id="id3">2.1 Scatter Plot</a></li>
+<li><a class="reference internal" href="#file-table" id="id4">2.2 File Table</a></li>
+<li><a class="reference internal" href="#source-text" id="id5">2.3 Source Text</a></li>
+<li><a class="reference internal" href="#clone-set-table" id="id6">2.4 Clone-Set Table</a></li>
+<li><a class="reference internal" href="#saving-detected-code-clone-or-scope" id="id7">2.5 Saving Detected Code Clone or Scope</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analyzing-code-clones-by-metrics" id="id8">3. Analyzing Code Clones by Metrics</a><ul>
+<li><a class="reference internal" href="#file-metrics" id="id9">File Metrics</a></li>
+<li><a class="reference internal" href="#clone-set-metrics" id="id10">Clone Set Metrics</a></li>
+<li><a class="reference internal" href="#line-based-metrics" id="id11">Line-based Metrics</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="detecting-code-clone">
+<h1><a class="toc-backref" href="#id1">1. Detecting Code Clone</a></h1>
+<p>Specify target source code from menu [File]-[Detect Clones].
+That is, select a (preprocess script of) programming language and directories of the garget source code.</p>
+<blockquote>
+<ul class="simple">
+<li>By &quot;Add Direcotry&quot; button or drag-and-drop, add directories to the &quot;Target directory list&quot;.</li>
+<li>CCFinderX will look up source files recursively from the directories.</li>
+</ul>
+</blockquote>
+<a class="reference external image-reference" href="images/fig3.1e.png"><img alt="images/fig3.1et.png" src="images/fig3.1et.png" /></a>
+<p>In the options dialog, use default values at first. Refer the manual for detail of each option.</p>
+<p>After that, the tool will detect code clones. When the detection finished, views of the tool will be updated.</p>
+<a class="reference external image-reference" href="images/fig3.2e.png"><img alt="images/fig3.2et.png" src="images/fig3.2et.png" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name"><img alt="tip" src="images/hint.png" /> Tip:</th><td class="field-body">When the detected code clones are too many, check &quot;Use prescreening&quot; in the optoins dialog.</td>
+</tr>
+</tbody>
+</table>
+<a class="reference external image-reference" href="images/fig3.3e.png"><img alt="images/fig3.3et.png" src="images/fig3.3et.png" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name"><img alt="tip" src="images/hint.png" /> Tip:</th><td class="field-body">By default, the order of source files is a lexical order of their path (multi-byte encoding lexical oder).
+CCFinderX seraches a file with one of the extensions that are predefined to each programming language
+(For example, .c, .cc, .cpp, .cxx, .h, .hh, .hpp, .hxx for C++).
+In order to change the order of source files and/or specify source files with special extension,
+make a file list by hand (file list is a text file, which includes a path of source file per line),
+and use GemX's menu [File]-[Detect Clones from File List].</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="investigating-code-clones">
+<h1><a class="toc-backref" href="#id2">2. Investigating Code Clones</a></h1>
+<p>You can investigate the detected code clones with views named File Table, Clone-Set Table, Scatter Plot, and Source Text, Scrapbook, and a Search box.</p>
+<a class="reference external image-reference" href="images/fig4.1e.png"><img alt="images/fig4.1et.png" src="images/fig4.1et.png" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">File Table:</th><td class="field-body">This view shows a list of target source files.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Clone-Set Table:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">This view shows a list of the detected code clones.</td>
+</tr>
+<tr class="field"><th class="field-name">Scatter Plot:</th><td class="field-body">This view shows where and how the code clones are distributed in the whole source files.</td>
+</tr>
+<tr class="field"><th class="field-name">Source Text:</th><td class="field-body">This view shows text of a source file. Code clones are illustrated as highlighted texts.</td>
+</tr>
+<tr class="field"><th class="field-name">Scrapbook:</th><td class="field-body">You can copy the code fragments shwon in Source Text view to Scrapbook.
+This view is almost the same as Source Text, except for Scrapbook does not follow the selection change in File Table or Clone-Set Table.</td>
+</tr>
+<tr class="field"><th class="field-name">Search box:</th><td class="field-body">Search in File Table, Clone-Set Table, Source Text, or Scrapbook.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="scatter-plot">
+<h2><a class="toc-backref" href="#id3">2.1 Scatter Plot</a></h2>
+<p>This view shows where and how the code clones are distributed in the whole source files.
+Checkboxes at the upper side of Scatter Plot are used to turn on/off boundary of source files, directory, etc.
+Refer the manual for the detail of each option.</p>
+<a class="reference external image-reference" href="images/fig4.1.1e.png"><img alt="images/fig4.1.1et.png" src="images/fig4.1.1et.png" /></a>
+<ul class="simple">
+<li>Gray vertical and horizontal lines are boundaries of the source files, that is, locations of the end-of-flies.</li>
+<li>Squares drawn by black lines (on the main diagonal line) are directories.</li>
+<li>Black lines (and dots) that located parallel to the main diagonal line are code clones<ul>
+<li>The corresponding orthogonal projections to the horizontal axis and vertical axis are the locations of similar code fragments.</li>
+</ul>
+</li>
+</ul>
+<p>Also, The list of source files are shown in File Table at the left of the Scatter Plot.</p>
+<div class="section" id="narrowing-down-of-file-list-zooming-scatter-plot">
+<h3>Narrowing Down of File List (Zooming Scatter Plot)</h3>
+<p>Select files by dragging. Then, from right-click menu [Fit Scope to Selected Files],
+you can narrow down the target files to the selected files.
+(This operation will also affect File Table, that is, the list of files in it will be updated.)</p>
+<a class="reference external image-reference" href="images/fig4.1.2e.png"><img alt="images/fig4.1.2et.png" src="images/fig4.1.2et.png" /></a>
+<p>In order to undo this operation, use right-click menu [Pop Scope].
+This option often cause missing number in File ID's.
+The file boundaries between such discontinuous file ID's are shown by dotted-line.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name"><img alt="tip" src="images/hint.png" /> Tip:</th><td class="field-body">Files in a directory can be selecteb by clicking the upper-right corner or lower-left corner of the square corresponding to the directory.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="file-table">
+<h2><a class="toc-backref" href="#id4">2.2 File Table</a></h2>
+<p>File Table shows a list of target source files.</p>
+<a class="reference external image-reference" href="images/fig4.2.1e.png"><img alt="images/fig4.2.1et.png" src="images/fig4.2.1et.png" /></a>
+<p>For each file, the following informations are shown:</p>
+<ul class="simple">
+<li>Index of the file(File ID)</li>
+<li>Path of the file</li>
+<li>Length of the file in token(LEN)</li>
+<li>Count of code clones included in the file(CLN)</li>
+</ul>
+<p>On the above of the list, a &quot;common&quot; path of the source files is shown.
+The common path is a path of the root directory of the files in the list.</p>
+<p>You can narrow down the list, by right-click menu.</p>
+<ul class="simple">
+<li>Select files by click, CTRL + click, or SHIFT + click -&gt; [Fit Scope to Selected Files] or [Fit Scope to Files Except for Selected Ones]</li>
+<li>Alternatively, [Select Files That Have Clones Between Them] or [Selected Files Under] ? [Fit Scope to Selected Files] or [Fit Scope to Files Except for Selected Ones]</li>
+</ul>
+<p>The status of narrowing-down of files can be canceled by menu [Pop Scope]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name"><img alt="tip" src="images/hint.png" /> Tip:</th><td class="field-body">In order to narrow down the file list with more complex selection
+(for example, keep files under two directories, or keep unselected files),
+use check boxes at the files in File Table. Refer the manual for operations about these check boxes.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="source-file-search">
+<h3>Source File Search</h3>
+<p>When the File Table has focus (the focus is shown by colored frame),
+you can search in File List by putting file name or path in Search box.
+You can also select a file having a specific File ID by putting &quot;#number&quot; (file ID) in Search box,</p>
+<a class="reference external image-reference" href="images/fig4.2.2e.png"><img alt="images/fig4.2.2et.png" src="images/fig4.2.2et.png" /></a>
+</div>
+<div class="section" id="looking-up-file-name-in-scatter-plot-scatter-plot-file-table">
+<h3>Looking up File Name in Scatter Plot (Scatter Plot -&gt; File Table)</h3>
+<p>When you click on Scatter Plot, the corresponding two files on vertical axis and horizontal axis will get into selected state.
+These files will be highlighted in File Table.
+By this operation, you can find out the names of the files.</p>
+<a class="reference external image-reference" href="images/fig4.2.4e.png"><img alt="images/fig4.2.4et.png" src="images/fig4.2.4et.png" /></a>
+</div>
+</div>
+<div class="section" id="source-text">
+<h2><a class="toc-backref" href="#id5">2.3 Source Text</a></h2>
+<p>This view shows text of a source file. Code clones are illustrated as highlighted text.</p>
+<p>When you select a file by clicking in File Table, text of the file will be shown in the Source Text.</p>
+<a class="reference external image-reference" href="images/fig4.3.1e.png"><img alt="images/fig4.3.1et.png" src="images/fig4.3.1et.png" /></a>
+<ul class="simple">
+<li>The area is composed of three views, Map (described in the next sheet), Line Number, and Text.</li>
+<li>Code clones are shown as text with gray background.</li>
+<li>The highlighting of line number shows code clones, but it also shows origin of the code. A highlight at left side means the code is similar to text of the other file. A highlight at the right side means the code is similar to text within the same file.</li>
+<li>Comments and the tokens (of comments or simple getters/setters) removed by a preprocess script are shown in green characters. Reserved words are shown in dark red characters.</li>
+</ul>
+<div class="section" id="text-search">
+<h3>Text Search</h3>
+<p>When Source Text has focus, you can search in text by putting word in Search box.
+You can also move to the specific line by putting &quot;#number&quot; (line number) in Search box.</p>
+<a class="reference external image-reference" href="images/fig4.3.2e.png"><img alt="images/fig4.3.2et.png" src="images/fig4.3.2et.png" /></a>
+</div>
+<div class="section" id="multiple-text-mode">
+<h3>Multiple Text Mode</h3>
+<p>When two (or more) files are selected in File Table or in Scatter Plot, Source Text will show two of the files.</p>
+<a class="reference external image-reference" href="images/fig4.3.3e.png"><img alt="images/fig4.3.3et.png" src="images/fig4.3.3et.png" /></a>
+<p>Figures shown in the map are:</p>
+<ul class="simple">
+<li>White bar: source file</li>
+<li>Gray vertical bars at the left side of the white bar: Clone code fragment enclosed within the file.</li>
+<li>Gray vertical bars at the right side of the white bar: Clone code fragment between the file and the other files.</li>
+<li>Gray crosswise or U-shaped line: indicates the code fragments belongs to a clone set.</li>
+<li>Yellow rounded rectangle: Range of shown text. You can update a Source Text view by dragging on the right side of the rectangle.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name"><img alt="tip" src="images/hint.png" /> Tip:</th><td class="field-body">The number of panes of Source Text view (that is, the maximum number of source files shown in the view at the same time)
+can be changed by menu [Preferences]-[GemX Preferences].</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="copy-to-scrapbook">
+<h3>Copy to Scrapbook</h3>
+<p>By right click menu [Copy to Scrapbook] in Source Text, its text is copied to Scrapbook.
+The Scrapbook is  not affected by selection change in File Table or Clone-Set Table,
+so the Scrapbook is conveninent when you are investigating code clones around a specific code fragment(s).</p>
+<a class="reference external image-reference" href="images/fig4.3.4e.png"><img alt="images/fig4.3.4et.png" src="images/fig4.3.4et.png" /></a>
+</div>
+</div>
+<div class="section" id="clone-set-table">
+<h2><a class="toc-backref" href="#id6">2.4 Clone-Set Table</a></h2>
+<p>Clone-Set Table shows a list of the detected code clones.
+A clone set is a set of code fragments, in which any pair of the code fragments is a code clone.
+For each clone set, ID (Clone-Set ID) and length are shown.</p>
+<a class="reference external image-reference" href="images/fig4.4.1e.png"><img alt="images/fig4.4.1et.png" src="images/fig4.4.1et.png" /></a>
+<p>Scope of Clone-Set Table is linked to scope of File Table.
+That is, if some files are removed from File Table by narrowing down,
+the enclosed code clones (whose code fragments appear only in these files) will be removed in Clone Set Table.
+(The reverse is not true. That is, if some code clones are removed from Clone-Set Table, the related files never be removed automatically.)</p>
+<div class="section" id="to-show-code-fragment-of-a-clone-set-clone-set-table-source-text">
+<h3>To Show Code Fragment of a Clone Set (Clone-Set Table -&gt; Source Text)</h3>
+<p>Show the Clone-Set Table at the left side, and show the Source Text at the right side, in advance.</p>
+<a class="reference external image-reference" href="images/fig4.4.2e.png"><img alt="images/fig4.4.2et.png" src="images/fig4.4.2et.png" /></a>
+<ul class="simple">
+<li>Select a clone set by clicking in Clone-Set Table, then pair of code fragments of the clone set will be shown in Source Text.
+By clicking the same clone set again, the next pair will be shown.</li>
+<li>You can see two code fragments of a clone a clone set at the same time, by right-click menu [Show Next Clone-Pair Code]</li>
+<li>Also, you can narrow down clone sets by right-click menu [Fit Scope to Selected Clone Sets].</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name"><img alt="tip" src="images/hint.png" /> Tip:</th><td class="field-body">Right-click menu [Show a Code Fragment] is used to show one code fragment of a clone set.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="saving-detected-code-clone-or-scope">
+<h2><a class="toc-backref" href="#id7">2.5 Saving Detected Code Clone or Scope</a></h2>
+<p>File menu has menu items to save scope and file list.</p>
+<a class="reference external image-reference" href="images/fig4.5.1e.png"><img alt="images/fig4.5.1et.png" src="images/fig4.5.1et.png" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Saving scope:</th><td class="field-body">A scope is a state of narrow-downing of files and code clones. Scopes are shown in Scope History at the leftmost view.</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>Save: from menu [File]-[Open Current Scope As]</li>
+<li>Load: from menu [File]-[Open Clone Data]</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Saving file list:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">A file list contains paths of source files in File Table.</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>Save: from menu [File]-[Save File List as]</li>
+<li>From menu [File]-[Detect Clones from File List], you can re-detect code clones from the source files that have been beforehand saved as a file list.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Re-detection of clones:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">In order to detect code clones from the source files of current scope with the different detection options, use menu [File]-[Re-Detect Clones].</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="analyzing-code-clones-by-metrics">
+<h1><a class="toc-backref" href="#id8">3. Analyzing Code Clones by Metrics</a></h1>
+<p>Metrics of code clones and metrics of files will help you find interesting code clones or source files.
+Also, line-based metrics measures the statistics by count of lines.
+GemX provides narrow-downing operations with metrics.</p>
+<div class="section" id="file-metrics">
+<h2><a class="toc-backref" href="#id9">File Metrics</a></h2>
+<p>File metrics will be shown in File Table, by menu [Metrics]-[Show File Metrics].</p>
+<a class="reference external image-reference" href="images/fig5.1.1e.png"><img alt="images/fig5.1.1et.png" src="images/fig5.1.1et.png" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">NBR (neighbor):</th><td class="field-body">Count of files that have a code-clone fragment between the file.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">RSA (ratio of similarity between another files):</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">Ratio (percentage) of tokens that are covered by a code clone between the file and one of the other files.
+If a file has a RSA value close to 100%, then it is possible that the file was created by copying a file.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">RSI (ratio of similarity within the file):</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">Ratio (percentage) of tokens that are covered by a code clone enclosed within the file.
+If a file has a RSI value close to 100%, then it is possible that the file contains a series of the similar functions or methods.</td>
+</tr>
+<tr class="field"><th class="field-name">CVR (coverage):</th><td class="field-body">Ratio (percentage) of tokens that are covered by any code clone. By definition, max(RSA, RSI) &lt;= CVR &lt;= RSA+RSI</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">RNR (ratio of non-repeated code):</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">Ratio of non-repeated code. 1 - (ratio of tokens appears in repetition in the text)
+If the value is near to zero, the code is repetition of simple statements and/or defenitions.</td>
+</tr>
+</tbody>
+</table>
+<p>From menu [Metrics]-[Filter File by Metrics], You can narrow down the file list by the minimum and maximum values of a metric.</p>
+<a class="reference external image-reference" href="images/fig5.1.2e.png"><img alt="images/fig5.1.2et.png" src="images/fig5.1.2et.png" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name"><img alt="tip" src="images/hint.png" /> Tip:</th><td class="field-body">By default, when you perform narrowing down of file list after showing file metrics, the metrics value will disappear from File Table.
+In order to make GemX re-calculate and show file metrics automatically after such narrowing-down,
+add check mark to [Calc File Metrics Always] in the dialog shown by menu [Preferences]-[GemX Prererences].</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="clone-set-metrics">
+<h2><a class="toc-backref" href="#id10">Clone Set Metrics</a></h2>
+<p>Clone-set metrics will be shown by menu [Metrics]-[Show Clone-Set Metrics].</p>
+<a class="reference external image-reference" href="images/fig5.2.1e.png"><img alt="images/fig5.2.1et.png" src="images/fig5.2.1et.png" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">LEN (length):</th><td class="field-body">Length (in token) of a code fragment of the code clone</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">POP (population):</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">Count of code fragments of the code clone</td>
+</tr>
+<tr class="field"><th class="field-name">NIF:</th><td class="field-body">Count of source files that include one or more code fragments of the code clone.
+By definition, NIF &lt;= POP (This metric is imported from Gemini, developed by Yoshiki Higo, Osaka Univ..)</td>
+</tr>
+<tr class="field"><th class="field-name">RAD (radius):</th><td class="field-body">Range of the source code fragments of a code clone in the directory hierarchy.
+(When all the code fragments of the code clone are located in one source file, the value is 0.)</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">RNR (ratio of non-repeated tokens):</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">Ratio (percentage) of tokens that are not included in repeated part of a code fragment of the code clone.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">TKS (token set size):</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">Size of a set of tokens of a code fragment of the code clone. If a code clone has a extremely small TKS value, then the code fragment is a simple statement, such as a series of declaration of variables.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">LOOP, COND, McCabe:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">LOOP is defined as count of loops in a code fragment, COND is defined as count of conditional branches, and McCabe is defined as the sum of them.
+In order to focus attention on complex code, select code clones with the higher values of these metrics.</td>
+</tr>
+</tbody>
+</table>
+<p>You can do filtering of code clones from menu [Metrics]-[Filter Clone Set by Metrics].</p>
+<a class="reference external image-reference" href="images/fig5.2.2e.png"><img alt="images/fig5.2.2et.png" src="images/fig5.2.2et.png" /></a>
+<p>When clone-set metrics are calculated, each clone in scatter plot will be colored by RNR metric value (by default).</p>
+<a class="reference external image-reference" href="images/fig5.2.3e.png"><img alt="images/fig5.2.3et.png" src="images/fig5.2.3et.png" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name"><img alt="tip" src="images/hint.png" /> Tip:</th><td class="field-body">Just like file metrics, the clone-set metrics can be automatically re-calculated and shown by menu [Preferences]-[GemX Preferences].</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="line-based-metrics">
+<h2><a class="toc-backref" href="#id11">Line-based Metrics</a></h2>
+<p>Line-based metrics will be shown by menu [Metrics]-[Show Line-based Metrics].</p>
+<a class="reference external image-reference" href="images/fig5.3.1e.png"><img alt="images/fig5.3.1et.png" src="images/fig5.3.1et.png" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">LOC:</th><td class="field-body">Raw line count of the soure file.</td>
+</tr>
+<tr class="field"><th class="field-name">SLOC:</th><td class="field-body">Count of lines, in case of excluding lines whithout any valid tokens.
+Here, the &quot;tokens&quot; are specific to CCFinderX. (For example, definitions of simple getters/setters
+in Java source file will be entirely neglected by CCFinderX.)
+Such neglected characters are shown in green color in Source Text view.</td>
+</tr>
+<tr class="field"><th class="field-name">CLOC:</th><td class="field-body">Count of lines including at least one token of a code fragment of a code clone.</td>
+</tr>
+<tr class="field"><th class="field-name">CVRL:</th><td class="field-body">Ratio of the lines including a token of a code fragment of a code clone. CVRL = CLOC / SLOC.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

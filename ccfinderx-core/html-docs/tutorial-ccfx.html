@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="us_ascii" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us_ascii" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Tutorial of CLI Tool ccfx</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body><center><a href="http://www.xrea.com/" target="_blank"><img src="http://imgj.xrea.com/banner_top_1.gif" width="468" height="9" border="0"></a><br><iframe height="60" width="468" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true" src="http://imgj.xrea.com/ad_iframe.html"><a href="http://img.xrea.com/ad_click.fcg" target="_blank"><img src="http://img.xrea.com/ad_img.fcg" border="0"></a></iframe></center>
+<div class="document" id="tutorial-of-cli-tool-ccfx">
+<h1 class="title">Tutorial of CLI Tool ccfx</h1>
+
+<blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Toshihiro Kamiya</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">2008/Nov/6</td>
+</tr>
+<tr class="field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:info&#64;ccfinder.net">info&#64;ccfinder.net</a></td>
+</tr>
+<tr class="field"><th class="field-name">Copyright:</th><td class="field-body">2008 ( C ) Toshihiro Kamiya. All rights reserved.</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#outline-of-command-line-of-ccfx" id="id1">1. Outline of command line of ccfx</a></li>
+<li><a class="reference internal" href="#detection-and-printing-of-code-clones" id="id2">2. Detection and printing of code clones</a></li>
+<li><a class="reference internal" href="#metrics-and-filtering" id="id3">3. Metrics and filtering</a><ul>
+<li><a class="reference internal" href="#calculation-of-metrics" id="id4">Calculation of metrics</a></li>
+<li><a class="reference internal" href="#filtering-by-metric-values" id="id5">Filtering by metric values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-list" id="id6">4. File list</a><ul>
+<li><a class="reference internal" href="#generating-a-file-list" id="id7">Generating a file list</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-group" id="id8">5. File group</a><ul>
+<li><a class="reference internal" href="#code-clone-detection-between-versions-with-file-group" id="id9">Code clone detection between versions with file group</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#appendix" id="id10">Appendix</a><ul>
+<li><a class="reference internal" href="#execution-modes-of-ccfx" id="id11">Execution modes of ccfx</a></li>
+<li><a class="reference internal" href="#preprocess-script-names" id="id12">Preprocess Script Names</a></li>
+<li><a class="reference internal" href="#options-of-execution-mode-d" id="id13">Options of execution-mode d</a></li>
+<li><a class="reference internal" href="#options-of-execution-mode-p" id="id14">Options of execution-mode p</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="outline-of-command-line-of-ccfx">
+<h1><a class="toc-backref" href="#id1">1. Outline of command line of ccfx</a></h1>
+<p>Tool ccfx is a CLI tool, that is, supposed to be invoked by user at command line. The tool has several functions including detection of code clones and filtering code clones with clone-set metrics or file metrics.</p>
+<p>The tool ccfx also works as a back end of GUI tool GemX, that is, GemX internally calls ccfx in order to detect code clones and analyze them.</p>
+<p>You can utilize the options of ccfx by invoking it directly at command line; some of such options are unavailable via GemX. Also, you can invoke ccfx in a batch file, in order to combine it with other command-line tools.</p>
+<p>The first argument of ccfx's command line is an execution-mode specifier. The available execution modes are: <tt class="docutils literal"><span class="pre">d</span></tt> , <tt class="docutils literal"><span class="pre">p</span></tt> , <tt class="docutils literal"><span class="pre">m</span></tt> , <tt class="docutils literal"><span class="pre">s</span></tt> , and <tt class="docutils literal"><span class="pre">f</span></tt> . As for detail of each mode, see <a class="reference internal" href="#execution-modes-of-ccfx">Execution modes of ccfx</a> . You can obtain the list of execution modes by the following command line:</p>
+<pre class="literal-block">
+ccfx -h
+</pre>
+<p>Also, you can obtain the help message of each execution mode by such as command-lines:</p>
+<pre class="literal-block">
+ccfx d -h
+ccfx m -h
+</pre>
+<p>The following sections present each execution mode, along with the supposed scenario in clone detection and analysis.</p>
+</div>
+<div class="section" id="detection-and-printing-of-code-clones">
+<h1><a class="toc-backref" href="#id2">2. Detection and printing of code clones</a></h1>
+<p>This section presents how to detect code clones, when a directory is given, which stores target source files.</p>
+<p>In this example, the source files are written in Java programming language, and the target directory is <tt class="docutils literal"><span class="pre">c:\target\src</span></tt> .</p>
+<p>In order to detect code clones with ccfx, use execution-mode d (d stands for detection).
+The following command line will let ccfx detect code clones from the source files and the result will be stored in a file a.ccfxd in the current directory:</p>
+<pre class="literal-block">
+ccfx d java -dn c:\target\src
+</pre>
+<p>The argument <tt class="docutils literal"><span class="pre">java</span></tt> means that target source files are written in Java.
+That is, with this argument, ccfx will search files having extension &quot;.java&quot; in (sub-directories of) the target directories,
+and apply a preprocessing for Java programming language.
+(The preprocessing is a kind of normalization, which depends on the syntax of each programming language, to improve correctness of clone detection.
+The detection algorithm itself is independent from programming languages; a single detection algorithm is used for source code written in any programming language.)
+Appendex includes a table of the preprocess script, programming language, and extensions of source files, as a section <a class="reference internal" href="#preprocess-script-names">Preprocess Script Names</a> .</p>
+<p>The option <tt class="docutils literal"><span class="pre">-dn</span></tt> is roughly to specify a directory which stores the target source files.
+The detected code clones will be stored to a file <tt class="docutils literal"><span class="pre">a.ccfxd</span></tt> , by default. In oder to specify name of the output file, use option &quot;-o file&quot; .
+The details of the options are shown in <a class="reference internal" href="#options-of-execution-mode-d">Options of execution-mode d</a> .</p>
+<p>The clone-data file (output file) is a binary file.
+In order to print them as text, use execution-mode p of ccfx (p stands for pretty printing):</p>
+<pre class="literal-block">
+ccfx p a.ccfxd
+</pre>
+<p>The execution-mode p has some options, which enable to extract part of information from a clone-data file. For example, each of target source file has a file ID (a kind of serial number), and a table containing each file path and its file ID will be obtained by the following command line:</p>
+<pre class="literal-block">
+ccfx p -ln a.ccfxd
+</pre>
+<p>The details of options are shown in <a class="reference internal" href="#options-of-execution-mode-p">Options of execution-mode p</a> .</p>
+</div>
+<div class="section" id="metrics-and-filtering">
+<h1><a class="toc-backref" href="#id3">3. Metrics and filtering</a></h1>
+<p>Tool ccfx has functions to calculate some kind of metrics for code clone and ones for source files. The user can use these metrics to perform some filtering of code clones or source files.</p>
+<div class="section" id="calculation-of-metrics">
+<h2><a class="toc-backref" href="#id4">Calculation of metrics</a></h2>
+<p>Just the same as the preceding section, the source files are written in Java, the target directory is <tt class="docutils literal"><span class="pre">c:\target\src</span></tt> . Additionally, the code-clone detection has already done, and the detected clones are stored in a clone-data file <tt class="docutils literal"><span class="pre">a.ccfxd</span></tt> .</p>
+<p>In order to calculate metrics, use execution-mode m. There are two categories of metrics: clone metrics and file metrics. The command line below is to extract clone metrics</p>
+<pre class="literal-block">
+ccfx m a.ccfxd -c
+</pre>
+<p>The command line below is to extract file metrics</p>
+<pre class="literal-block">
+ccfx m a.ccfxd -f
+</pre>
+<p>In execution-mode m's command lines, you have to type <em>clone-data file before option -c or -f</em> .</p>
+<p>The output files are specified with option &quot;-o file&quot; . You can specify option -o for each option -c or -f. So a command line below means extracting both clone metrics and file metrics:</p>
+<pre class="literal-block">
+ccfx m a.ccfxd -c -o clonemetrics.tsv -f -o filemetrics.tsv
+</pre>
+<p>Each of clone metrics and file metrics is printed out as a tab-separated text file, so you can see the values by opening the files with a spreadsheet application.</p>
+<p>In the output of file metrics, each input source file is denoted by file ID, that is, a serial number of each target file (as described previously, use command line <tt class="docutils literal"><span class="pre">ccfx</span> <span class="pre">p</span> <span class="pre">-ln</span> <span class="pre">a.ccfxd</span></tt>  for checking the IDs).</p>
+</div>
+<div class="section" id="filtering-by-metric-values">
+<h2><a class="toc-backref" href="#id5">Filtering by metric values</a></h2>
+<p>Filtering of clone-data file with the metrics requires the following two steps; at first, making a list of file IDs (or clone iDs), which should remain in the data. Secondly, modify the clone-data file using the list.</p>
+<div class="section" id="step-1">
+<h3>Step 1</h3>
+<p>As an example, considering removal of source files who don't related to code clone. Assume that file metrics is already calculated as a file <tt class="docutils literal"><span class="pre">filemetrics.tsv</span></tt> . Also, the predicate (to identify the files to be remaining) is &quot;the file is including code fragments of a code clone?&quot;, that is, <tt class="docutils literal"><span class="pre">CVR</span> <span class="pre">&gt;</span> <span class="pre">0.0</span></tt> as an expression using clone metrics.</p>
+<p>The command line below is to extract the set of file IDs that satisfy this predicate</p>
+<pre class="literal-block">
+picosel from filemetrics.tsv select FID where CVR .gt. 0.0 &gt; remainingfiles.txt
+</pre>
+<p>In this command line, FID means the name of column in file metrics (All names are printed in the first line of the metrics file). The CVR means the metric that shows ratio of the tokens that are covered by any code clone. The <tt class="docutils literal"><span class="pre">.gt.</span></tt> means an operator &quot;greater than&quot;.</p>
+<p>The expression after the <tt class="docutils literal"><span class="pre">where</span></tt> in the command line is the condition of remaining files. The operators below are used in expression.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operator</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">.eq.</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">=</span></tt> , equals to</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">.ge.</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&gt;=</span></tt> , greater than or equals to</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">.gt.</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&gt;</span></tt> , greater than</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">.le.</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&lt;=</span></tt> , smaller than or equals to</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">.lt.</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&lt;=</span></tt> , smaller than</td>
+</tr>
+</tbody>
+</table>
+<p>Also, <tt class="docutils literal"><span class="pre">and</span></tt> is used to concatenate conditions. For example, in order to select the source files that are including repeated sections heavily ( <tt class="docutils literal"><span class="pre">RNR</span> <span class="pre">&lt;</span> <span class="pre">0.1</span></tt> ) and having much amount of code clones between the file and the other file ( <tt class="docutils literal"><span class="pre">RSA</span> <span class="pre">&gt;</span> <span class="pre">0.9</span></tt> )</p>
+<pre class="literal-block">
+picosel from filemetrics.tsv select FID where RNR .lt. 0.1 and RSA .gt. 0.9 &gt; remainingfiles.txt
+</pre>
+<p>This example is to filter source files with file metrics. In order to filter code clone with clone metrics, in the above command line, replace the FID with CID, and the condition with the condition including clone metrics.</p>
+<p>When the file remainingfiles.txt is successfully generated, the first step is done. In the second step, this generated file will be used to determine which source files (or code clones) will be remained.</p>
+</div>
+<div class="section" id="step-2">
+<h3>Step 2</h3>
+<p>The execution-mode s is used to perform filtering with the list of file IDs (or clone IDs) which will be remained. (the s stands for subset or scope).</p>
+<p>The following command line will do a filtering by file ID and save the result to  a file filtered.ccfxd:</p>
+<pre class="literal-block">
+ccfxd s a.ccfxd -o filtered.ccfxd -fi remainfiles.txt
+</pre>
+<p>Here, the option &quot;-fi file&quot; means to keep the source files with one of the file IDs (which appear in remainingfiles.txt) and also to remove the other source files from the clone data file.</p>
+<p>In order to do filtering by clone ID, use option &quot;-ci file&quot; , in place of the option &quot;-fi file&quot; .</p>
+</div>
+<div class="section" id="summary-of-command-lines-for-filtering-by-file-metrics">
+<h3>Summary of command lines for filtering by file metrics</h3>
+<p>Do filtering to the input clone-data file a.ccfxd, and save the result to a clone-data file filtered.ccfxd:</p>
+<pre class="literal-block">
+ccfx m a.ccfxd -f -o filemetrics.tsv
+picosel -o remainfiles.txt from filemetrics.tsv select FID where &quot;CONDITION&quot;
+ccfx s a.ccfxd -o filtered.ccfxd -fi remainfiles.txt
+</pre>
+</div>
+<div class="section" id="summary-of-command-lines-for-filtering-by-clone-metrics">
+<h3>Summary of command lines for filtering by clone metrics</h3>
+<p>Do filtering to the input clone-data file a.ccfxd, and save the result to a clone-data file filtered.ccfxd:</p>
+<pre class="literal-block">
+ccfx m a.ccfxd -c -o clonemetrics.tsv
+picosel -o remainclones.txt from clonemetrics.tsv select CID where &quot;CONDITION&quot;
+ccfx s a.ccfxd -o filtered.ccfxd -ci remainclones.txt
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="file-list">
+<h1><a class="toc-backref" href="#id6">4. File list</a></h1>
+<p>This section presents how to generate a file list (that is a list of the input source files of code-clone detection), and how to use a file list in detection and analysis of code clones.</p>
+<p>A file list is used to specify paths of target source files, in an explicit way, one-by-one. Such an explicit specification of files is useful in the following cases.</p>
+<dl class="docutils">
+<dt>Excluding some source files from a list of the input source file</dt>
+<dd>The CCFinderX (ccfx) doesn't have a capability to identify a tool-generated source files (Because there is no standard method to marking or identifying such tool-generated source files. I am looking forward to java.annotation.Geneted in Java programming language or similar programming-language level solutions. )</dd>
+<dt>Includes some source files having a non-standard extension</dt>
+<dd>By default, a source file with special extension will not be regarded as a target (in execution-mode d's option -d, or file searching in execution-mode f). If you are using such special extensions (for example, .inl in VC++), and you want to include such files in the target of clone detection, use a file list in order to specify these files explicitly.</dd>
+<dt>Modification of the order in source files</dt>
+<dd>By default, the order of source files is a kind of lexical order, with comparing paths of source files encoding in UTF-8. For example, when you want to place some two directories in the nearhood in a clone scatter plot, you can edit the file list.</dd>
+</dl>
+<div class="section" id="generating-a-file-list">
+<h2><a class="toc-backref" href="#id7">Generating a file list</a></h2>
+<p>Just the same as the preceding section, the source files are written in Java, the target directory is <tt class="docutils literal"><span class="pre">c:\target\src</span></tt> .</p>
+<p>In order to find out Java source files in the target directory and save the file list as a file <tt class="docutils literal"><span class="pre">filelist.txt</span></tt> , type following command line:</p>
+<pre class="literal-block">
+ccfx f java -a -l n c:\target\src -o filelist.txt
+</pre>
+<p>Here the option <tt class="docutils literal"><span class="pre">-a</span></tt> is to specify storing each file path as an absolute path in the result file list. The option <tt class="docutils literal"><span class="pre">-l</span> <span class="pre">n</span></tt> is to add a preprocessed-directory option to the file list, that is, a line, which describes an option <tt class="docutils literal"><span class="pre">-n</span></tt>, will be inserted as the first line of the file list. The <tt class="docutils literal"><span class="pre">-n</span></tt> line in a file list will work as if it will be a command-line option <tt class="docutils literal"><span class="pre">-n</span></tt> of execution-mode d, in a clone detection afterwards.</p>
+<p>A clone detection itself will be done without these options ( <tt class="docutils literal"><span class="pre">-a</span></tt> and <tt class="docutils literal"><span class="pre">-l</span> <span class="pre">n</span></tt> ). However, as a preparation for display the clone-data file with GemX afterwards, and in order to prevent the preprocessed files from existing in the same directory of the target source files, these options are recommended.</p>
+<p>The file list is a text file, so you can edit it with a text editor and freely add or delete names of source files. As a matter of course, any text file in the same format will be used as a file list, even if the file is not generated by execution-mode f.</p>
+<p>When a file list is ready, use option <tt class="docutils literal"><span class="pre">-i</span></tt> of execution-mode d like the following command line, in order to detect code clones from the source files that are listed in the file list:</p>
+<pre class="literal-block">
+ccfx d java -i filelist.txt
+</pre>
+<p>When you specify multiple file lists in the command line, ccfx will work as if a file list that is a concatenation of them:</p>
+<pre class="literal-block">
+ccfx d java -i filelist1.txt -i filelist2.txt
+</pre>
+<p>You can also specify option <tt class="docutils literal"><span class="pre">-is</span></tt> in a file list, in addition to a path of source file, option <tt class="docutils literal"><span class="pre">-n</span></tt> .  When a file list including a line, which is including only <tt class="docutils literal"><span class="pre">-is</span></tt>, the source files before the line and the source files after the line will belong the distinct file groups. As for the file group, see the next section <a class="reference internal" href="#file-group">5. File group</a> .</p>
+</div>
+</div>
+<div class="section" id="file-group">
+<h1><a class="toc-backref" href="#id8">5. File group</a></h1>
+<p>File groups are used for separating the target source files into some groups and detecting code clones only between the groups.</p>
+<p>The execution-mode d has two options, which are related with file group.
+In order to separate source files into groups, use option <tt class="docutils literal"><span class="pre">-is</span></tt> . In order to detect code clones only between the groups and not to detect code clones between two files in the same group or code clones within a file, use option <tt class="docutils literal"><span class="pre">-w</span></tt> .</p>
+<div class="section" id="code-clone-detection-between-versions-with-file-group">
+<h2><a class="toc-backref" href="#id9">Code clone detection between versions with file group</a></h2>
+<p>This subsection presents an example where the target source code is two versions of a product, and detecting code clones between versions (and not detecting code clones inside each version).</p>
+<p>The source files of the older version are stored in a directory <tt class="docutils literal"><span class="pre">c:\oldsrc</span></tt>, and ones of the newer version is <tt class="docutils literal"><span class="pre">c:\newsrc</span></tt> . The following command line will detect code clones only between versions:</p>
+<pre class="literal-block">
+ccfx d java -dn c:\oldsrc -is -dn c:\newsrc -w f-w-g+
+</pre>
+<p>Here, each argument means:</p>
+<ul class="simple">
+<li>the first <tt class="docutils literal"><span class="pre">d</span></tt> means execution-mode d.</li>
+<li>the next <tt class="docutils literal"><span class="pre">java</span></tt> means the target source file is written in Java.</li>
+<li>the next <tt class="docutils literal"><span class="pre">-dn</span> <span class="pre">c:\oldsrc</span></tt> is to specify searching source files from the directory. In this case, the older versions of source files.</li>
+<li>the next <tt class="docutils literal"><span class="pre">-is</span></tt> is a group separator, that is, the source files before this option and the source files after this option will belong to the distinct groups.</li>
+<li>the next <tt class="docutils literal"><span class="pre">-dn</span> <span class="pre">c:\newsrc</span></tt> is to specify searching source files from the directory. In this case, the newer versions of source files.</li>
+<li>the last <tt class="docutils literal"><span class="pre">-w</span> <span class="pre">w-f-g+</span></tt> means &quot;do not detect code clones within a file&quot;, &quot;do not detect code clones between files in the same file group&quot;, and &quot;detect code clones between files from the distinct file groups&quot;.</li>
+</ul>
+<p>By comparing two versions with code clone, you can analyze them from view point of similarity, rather than difference. For example, you can observe the case where a code fragment was copied-and-pasted many times and has been spread over the product, or the case where duplicated code in the older versions has been cleaned up in the newer version.</p>
+</div>
+</div>
+<div class="section" id="appendix">
+<h1><a class="toc-backref" href="#id10">Appendix</a></h1>
+<div class="section" id="execution-modes-of-ccfx">
+<h2><a class="toc-backref" href="#id11">Execution modes of ccfx</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Execution Mode</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>d</td>
+<td>Detection. Input: paths of target source files. Output: a clone-data file.</td>
+</tr>
+<tr><td>p</td>
+<td>Pretty printing. Prints out contents of a clone-data file in a text format.</td>
+</tr>
+<tr><td>m</td>
+<td>Metrics. Calculates and prints out metrics about each code clone or metrics about each source file, from a given clone-data file.</td>
+</tr>
+<tr><td>s</td>
+<td>Filtering. Input: A clone-data file and a list of file IDs (or a list of code-clone IDs). Output: A clone-data file, which is filtered with the condition.</td>
+</tr>
+<tr><td>f</td>
+<td>File-list generation. Searches source files from the specified directories.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="preprocess-script-names">
+<h2><a class="toc-backref" href="#id12">Preprocess Script Names</a></h2>
+<p>The execution-mode d (detection of code clones) requires a name of preprocess script at the first argument of command line. The name of preprocess script will be also stored in a clone-data file, so you can see name of preprocess script for a given clone-data file, with execution-mode p. The applicable names are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name of Preprocess Script</th>
+<th class="head">Programming Language</th>
+<th class="head">Extensions of Source Files</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>cobol</td>
+<td>Cobol</td>
+<td>.cbl, .cob, .cobol</td>
+</tr>
+<tr><td>cpp</td>
+<td>C/C++</td>
+<td>.h, .hh, .hpp, .hxx, .c, .cc, .cpp, .cxx</td>
+</tr>
+<tr><td>csharp</td>
+<td>C#</td>
+<td>.cs</td>
+</tr>
+<tr><td>java</td>
+<td>Java</td>
+<td>.java</td>
+</tr>
+<tr><td>visualbasic</td>
+<td>Visual Basic</td>
+<td>.vb, .bas, .frm</td>
+</tr>
+<tr><td>plaintext</td>
+<td>Text file</td>
+<td>.txt</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="options-of-execution-mode-d">
+<h2><a class="toc-backref" href="#id13">Options of execution-mode d</a></h2>
+<p>The execution-mode d has the following options to change conditions in code-clone detection. The list below contains commonly-used options.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">-b</span> <span class="pre">number</span></tt></dt>
+<dd>The minimum length of the detected code clones. The unit of length is token (i.e., metric LEN). The default is <tt class="docutils literal"><span class="pre">-b</span> <span class="pre">50</span></tt> . The code fragments whose LEN is smaller than this value will not be detected as a code clone.</dd>
+<dt><tt class="docutils literal"><span class="pre">-t</span> <span class="pre">number</span></tt></dt>
+<dd>The minimum number of kinds of tokens in code fragments (metric TKS). The default is <tt class="docutils literal"><span class="pre">-t</span> <span class="pre">12</span></tt> . For example, A code fragment &quot;A = 1; B = 1 + 2; C = 1 + 2 + 3; D = 1 + 2 + 3 + 4;&quot; consists of tokens, which are classified one of the following four kinds: identifer, &quot;=&quot;, integer literal, &quot;;&quot; . As a result, this code fragments will not be detected as a code clone with the default option -t 12.</dd>
+<dt><tt class="docutils literal"><span class="pre">-w</span> <span class="pre">range_specifier</span></tt></dt>
+<dd>This option is used to specify to detect inner-file clones and/or inter-file clones. The inter-file clone means that two code fragments of the code clone appear in the distinct two source files. The inner-file clone means the two code fragments of the code clone appear in the same source file. By giving argument f- to option -w (that is, <tt class="docutils literal"><span class="pre">-w</span> <span class="pre">f-</span></tt> ), the inter-file clones will not be detected. By giving argument w- to option -w (that is, <tt class="docutils literal"><span class="pre">-w</span> <span class="pre">w-</span></tt> ), the inner-file clones will not be detected. You can also give argument f+ or w+ explicitly, in order to specify to detect inter-file clones or inner-file clones, respectively. The default is <tt class="docutils literal"><span class="pre">-w</span> <span class="pre">f+w+</span></tt> , that is, detect both inter-file clones and inner-file clones. Option -w has yet another parameter, g+, g-, whose usages are shown in <a class="reference internal" href="#file-group">5. File group</a> .</dd>
+<dt><tt class="docutils literal"><span class="pre">-dn</span> <span class="pre">directory</span></tt></dt>
+<dd>This option means to specify both option -d and -n to the directory.</dd>
+<dt><tt class="docutils literal"><span class="pre">-d</span> <span class="pre">directory</span></tt></dt>
+<dd>This option is used to specify a target directory, that is, the target source files will be searched under the directory. When the directory is specified by an absolute path, each name of source file in the clone data (output file) will be stored as an absolute path. When the directory is specified by a relative path, each name of source files in the clone data will be stored as a relative path. Note that GemX requires absolute path to show clones in the clone-data file.</dd>
+<dt><tt class="docutils literal"><span class="pre">-n</span> <span class="pre">directory</span></tt></dt>
+<dd>This option is to specify a directory for intermediate data files (preprocess-result files, or simply preprocessed files). When ccfx runs without option -n, it will generate a preprocessed file (.ccfxprep) for each of input source files, and will put the preprocessed file in the same directory of the corresponding source file. An argument of option -n should be the directory of source files or the parent directory of it. Otherwise, the option will be neglected.</dd>
+<dt><tt class="docutils literal"><span class="pre">-i</span> <span class="pre">file_list</span></tt></dt>
+<dd>When this option is specified, the ccfx will read paths of source files from the file list. The file list is a text file, which contains a path of source file in each line. The option -i will be useful when you have to detect clones from  part of source files in a directory, or detect clones from source files having special extensions. See section <a class="reference internal" href="#file-list">4. File list</a> for the detail.</dd>
+<dt><tt class="docutils literal"><span class="pre">--threads=number</span></tt></dt>
+<dd>This option is to specify number of worker threads in code-clone detection. On multi-core CPU, the detection time will be shortened by this option.</dd>
+</dl>
+</div>
+<div class="section" id="options-of-execution-mode-p">
+<h2><a class="toc-backref" href="#id14">Options of execution-mode p</a></h2>
+<p>The execution-mode p has some options, not so much as mode d.
+This sub-section presents some of them, which will be useful in scripting, such as extracting some kind statistics data from a clone-data file by a script.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">-l</span></tt></dt>
+<dd>Extracting a list of path of each source file from a clone-data file.</dd>
+<dt><tt class="docutils literal"><span class="pre">-ln</span></tt></dt>
+<dd>Extracting a list of path and file ID of each source file from a clone-data file.</dd>
+<dt><tt class="docutils literal"><span class="pre">-a</span></tt></dt>
+<dd>Reverse pretty printing. That is, generate a (binary) clone-data file from a text file, which is generated with pretty printing.</dd>
+</dl>
+</div>
+</div>
+</div>
+</body>
+</html>
