@@ -78,3 +78,23 @@ Use the detector python module for clone detection and save the results to Postg
 from detector import *
 detect_clones(snippet_dname, ccf_opt, snippet_id_range, connect_str)
 ```
+
+Manually running CCFinder can be found in CCFinder's documentation. Below are some common usages.
+To start clone detection, in directory `ccfinderx-core/ccfx` run:
+
+```bash
+ccfx d java -dn ~/code/nbooks/snippets -o ~/code/nbooks/allsnippets.ccfxd
+# or with options
+ccfx d java -b 30 -dn ~/code/nbooks/snippets -o ~/code/nbooks/allsnippets_b30.ccfxd
+```
+
+To view the detection result, run:
+```bash
+ccfx p a.ccfxd
+```
+
+Use the following commands to export clone metrics and file metrics
+
+```bash
+ccfx m a.ccfxd -c -o clonemetrics.tsv -f -o filemetrics.tsv
+```
