@@ -112,6 +112,9 @@ All the analysis are included in the python module [py](py).
     - clones.py
       provides classes to abstract the clone groups and clone instances.
 
+    - cgraph.py
+      provide functions to store clone relations to Neo4j graph database, and execute equivalent but simpler query of labeled posts.
+
     - statstest.py
       provides statistical testing on different aspects of secure vs insecure posts.
 
