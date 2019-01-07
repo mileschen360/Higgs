@@ -1,0 +1,16 @@
+There are 4 columns in each csv file.
+
+column 1: post id. 
+To locate the post on Stack Overflow.
+
+column 2: index.
+To locate the code snippet within that post. 
+The first code snippet within markup <code></code> has index 0.
+
+column 3: code.
+The fragment of the code snippet detected by CCFinder.
+
+column 4: category.
+The security category (1: SSL, 2:Symmetric Cryptographic, 
+3: Asymmetric Cryptographic, 4: Hash, 5: Random Number Generator. 
+A snippets can belong to multiple category, eg. 24, or 42)
