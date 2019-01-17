@@ -69,7 +69,7 @@ AND (marks.processed IS NULL OR marks.processed=FALSE);
 
 ### Clone detection
 
-Use the detector python module for clone detection and save the results to PostgreSQL database.
+Use the detector python module ([py/detector.py](py/detector.py)) for clone detection and save the results to PostgreSQL database.
 
 ``` python
 from detector import *
