@@ -2,7 +2,7 @@
 
 This is the repository for producing the results of our paper published in [The 41st ACM/IEEE International Conference on Software Engineering (ICSE 2019)](https://2019.icse-conferences.org/track/icse-2019-Technical-Papers#event-overview).
 
-The title of the paper is: How Reliable is the Crowdsourced Knowledge of Security Implementation? [pdf](https://arxiv.org/pdf/1901.01327.pdf)
+The title of the paper is: How Reliable is the Crowdsourced Knowledge of Security Implementation? [[pdf]](https://arxiv.org/pdf/1901.01327.pdf)
 ## Dependencies
 
 - PostgreSQL
